@@ -1,0 +1,32 @@
+- name: install the latest version of Apache Maven
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: apt-get update
+      apt: update_cache=yes
+      become: true
+    
+    - name: AWS | install python-pip
+      action: apt pkg=python-pip 
+      become: true
+    
+
+    - name: ensure pip3 is installed
+      apt:
+        name: python3-pip
+        cache_valid_time: "{{ apt_cache_valid_time|default(omit) }}"
+        install_recommends: no
+        state: latest
+        update_cache: yes
+      become: true
+      tags:
+        - pip
+    - name: Install and upgrade pip
+      pip:
+        name: pip
+        extra_args: --upgrade
+        executable: pip3
+        
+    - name: AWS | install awscli
+      pip: name=awscli
+      become: true

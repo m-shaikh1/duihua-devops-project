@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+body {
+	font-family: 'Caladea', serif;
+}
+
+#background-img {
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	z-index: -999;
+	background-size:cover;
+}
+
+.table {
+	opacity: 85%;
+}
+
+.card {
+	opacity: 85%;
+}

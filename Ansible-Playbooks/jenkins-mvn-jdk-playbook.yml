@@ -1,0 +1,48 @@
+- name: install the latest version of Apache Maven
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: install the latest version of Apache Maven
+      apt:
+        name: maven
+        state: latest
+      become: true
+    - name: Install Java using Ansible
+      apt:
+        name: "openjdk-11-jdk"
+        state: present
+        update_cache: yes
+      become: true
+    - name: Download Jenkins repo URL for
+      apt_key:
+        url: https://pkg.jenkins.io/debian-stable/jenkins.io.key 
+        state: present
+      become: true
+    - name: ensure the repository is configured
+      apt_repository: repo='deb https://pkg.jenkins.io/debian-stable/ binary/' state=present
+      become: true
+    - name: update apt cache
+      apt:
+        update_cache: yes
+        state: latest
+      become: true
+    - name: Install jenkins
+      apt:
+        name: jenkins
+        state: latest
+      become: true
+    - name: Start jenkins
+      service:
+        name: jenkins
+        enabled: true
+        state: started
+      become: true
+    - name: init password jenkin
+      shell: cat /var/lib/jenkins/secrets/initialAdminPassword
+      changed_when: false
+      register: result
+      become: true
+    - name: print init password jenkins
+      debug:
+        var: result.stdout
+
