@@ -17,13 +17,13 @@ pipeline {
         
         stage ("terraform init") {
             steps {
-                sh ('terraform init ./Terraform --upgrade') 
+                sh ('terraform init -chdir=Terraform --upgrade') 
             }
         }
         
         stage ("terraform apply") {
             steps {
-                sh ('terraform apply ./Terraform -target="module.aws-elasticbeanstalk.aws_elastic_beanstalk_application.sudos-duihua-app" --auto-approve')
+                sh ('terraform apply -chdir=Terraform -target="module.aws-elasticbeanstalk.aws_elastic_beanstalk_application.sudos-duihua-app" --auto-approve')
            }
         }
     }
