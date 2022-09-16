@@ -38,8 +38,3 @@ module "s3bucket" {
   source = "./modules/aws-s3bucket"
 
 }
-
-module "elasticbeanstalk" {
-  source = "./modules/aws-elasticbeanstalk"
-
-}

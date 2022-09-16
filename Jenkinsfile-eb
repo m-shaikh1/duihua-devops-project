@@ -15,13 +15,7 @@ pipeline {
         
         stage ("terraform apply") {
             steps {
-                sh ('terraform apply -target=module.aws-cloudfront --auto-approve')  
-           }
-        }
-
-        stage ("terraform output") {
-            steps {
-                sh ('terraform output eb-cname')  
+                sh ('terraform apply -target=module.aws-elasticbeanstalk --auto-approve')  
            }
         }
     }
