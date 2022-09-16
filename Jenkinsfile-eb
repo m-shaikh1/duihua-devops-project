@@ -15,7 +15,7 @@ pipeline {
         
         stage ("terraform apply") {
             steps {
-                sh ('terraform apply --auto-approve -target=`"`module.aws-elasticbeanstalk.aws_elastic_beanstalk_application.sudos-duihua-app`"`')
+                sh ('terraform apply --auto-approve -target="`module.aws-elasticbeanstalk.aws_elastic_beanstalk_application.sudos-duihua-app`"')
            }
         }
     }
