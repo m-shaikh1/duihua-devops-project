@@ -13,6 +13,9 @@
    
     # sonarqube
     docker container run -d -p 9000:9000 --name sonarserver sonarqube:8.2-community
+
+    # MySql Database
+    docker run  --name mysql -e MYSQL_ROOT_PASSWORD=mysql -e MYSQL_USER=mysql -e MYSQL_DATABASE=mysql -e MYSQL_PASSWORD=mysql -d -p 3306:3306 mysql
     
     # install Terraform
     sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
@@ -28,12 +31,8 @@
     sudo apt update -y
     sudo apt-get install terraform
 
-    # create ansible-playbook:
-    # takes a long time to open page
-    # git clone https://<Token>:x-oauth-basic@github.com/Sudos-Team/DuiHua.git
-    # Token:select the scope Repo – Full Control
-
-    git clone https://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:x-oauth-basic@github.com/Sudos-Team/DuiHua.git
-    cd DuiHua/Ansible-Playbooks
+    # Clone the git hub repository for cloudfront implementation and running playbooks
+    git clone https://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:x-oauth-basic@github.com/m-shaikh1/duihua-devops-project.git 
+    cd duihua-devops-project/Ansible-Playbooks
     ansible-playbook jenkins-mvn-jdk-playbook.yml
     ansible-playbook pip-awscli-playbook.yml

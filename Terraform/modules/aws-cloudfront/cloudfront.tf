@@ -1,10 +1,10 @@
 locals {
-  origin_id = aws_elastic_beanstalk_environment.sudos-duihua-env.load_balancers[0]
+  origin_id = "duihua-devops-project-cf" 
 }
 
 resource "aws_cloudfront_distribution" "distribution" {
   origin {
-    domain_name = aws_elastic_beanstalk_environment.sudos-duihua-env.cname
+    domain_name = module.aws-elasticbeanstalk.eb-cname 
     origin_id   = local.origin_id
 
     custom_origin_config {
@@ -13,17 +13,11 @@ resource "aws_cloudfront_distribution" "distribution" {
       origin_protocol_policy = "match-viewer"
       origin_ssl_protocols   = ["TLSv1"]
     }
-
-    #s3_origin_config {
-    # origin_access_identity = "origin-access-identity/cloudfront/ABCDEFG1234567"
-    #}
   }
 
   enabled             = true
   is_ipv6_enabled     = true
   comment             = "This is Duihua Application from ElasticBeanstalk"
-  default_root_object = "index.html"
-
 
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
@@ -57,7 +51,4 @@ resource "aws_cloudfront_distribution" "distribution" {
   viewer_certificate {
     cloudfront_default_certificate = true
   }
-  # depends_on = [
-  #   aws_elastic_beanstalk_environment.sudos-duihua-env
-  # ]
 }
