@@ -9,7 +9,7 @@ terraform {
 
 provider "aws" {
 
-  region = var.REGION
+  region = "us-east-1"
 
 }
 resource "aws_elastic_beanstalk_application" "sudos-duihua-app" {
