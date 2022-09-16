@@ -6,22 +6,16 @@ pipeline {
     }
     
     stages {
-        
+  
         stage ("terraform init") {
             steps {
-                sh ('terraform init') 
+                sh ('terraform -chdir=Terraform/modules/aws-cloudfront init -upgrade') 
             }
         }
-        
+
         stage ("terraform apply") {
             steps {
-                sh ('terraform apply -target=module.aws-cloudfront --auto-approve')  
-           }
-        }
-
-        stage ("terraform output") {
-            steps {
-                sh ('terraform output eb-cname')  
+                sh ('terraform -chdir=Terraform/modules/aws-cloudfront apply --auto-approve')
            }
         }
     }
