@@ -6,6 +6,12 @@ pipeline {
     }
     
     stages {
+
+        stage ("cd") {
+            steps {
+                sh ('cd Terraform') 
+            }
+        }
         
         stage ("terraform init") {
             steps {
