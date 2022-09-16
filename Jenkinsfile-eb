@@ -6,15 +6,7 @@ pipeline {
     }
     
     stages {
-
-        stage ("cd") {
-            steps {
-                sh ('pwd') 
-                sh ('cd Terraform') 
-                sh ('pwd') 
-            }
-        }
-        
+  
         stage ("terraform init") {
             steps {
                 sh ('terraform -chdir=Terraform init ') 
