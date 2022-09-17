@@ -1,10 +1,6 @@
 resource "aws_instance" "sudos-duihua-ec2" {
   ami           = var.ami-image
   instance_type = var.instance_type
-  # provisioner "file" {
-  #   source      = "../Ansible-Playbooks/"
-  #   destination = "/home/"
-  # }
   user_data = file("install.sh")
   associate_public_ip_address = true
 
