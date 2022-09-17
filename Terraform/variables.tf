@@ -44,6 +44,3 @@ variable "eb-env-name" {
 variable "eb-solution-stack-name" {
   default = "64bit Amazon Linux 2 v4.2.18 running Tomcat 8.5 Corretto 11"
 }
-variable "eb-cname" {
-  default = module.aws-elasticbeanstalk.eb-cname
-}

@@ -1,24 +1,10 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "4.18.0"
-    }
-  }
-}
-
-provider "aws" {
-
-  region = "us-east-1"
-
-}
 locals {
   origin_id = "duihua-devops-project-cf" 
 }
 
 resource "aws_cloudfront_distribution" "distribution" {
   origin {
-    domain_name = var.cname
+    domain_name = aws_elastic_beanstalk_environment.sudos-duihua-env.cname
     origin_id   = local.origin_id
 
     custom_origin_config {
@@ -62,5 +48,4 @@ resource "aws_cloudfront_distribution" "distribution" {
   viewer_certificate {
     cloudfront_default_certificate = true
   }
-  create_duration = "15m"
 }
