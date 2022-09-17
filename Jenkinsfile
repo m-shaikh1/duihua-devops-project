@@ -63,6 +63,11 @@ pipeline {
                 sh "aws s3 cp ./target/*.war s3://$AWS_S3_BUCKET/$ARTIFACT_NAME"
             }
          }
+         stage ("terraform destroy") {
+            steps {
+                sh ('terraform -chdir=Terraform/modules/aws-elasticbeanstalk-cloudfront destroy --auto-approve') 
+            }
+        }
         stage ("terraform init") {
             steps {
                 sh ('terraform -chdir=Terraform/modules/aws-elasticbeanstalk-cloudfront init') 
