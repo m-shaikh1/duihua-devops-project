@@ -15,7 +15,7 @@ pipeline {
 
         stage ("terraform apply") {
             steps {
-                sh ('terraform -chdir=Terraform/modules/aws-elasticbeanstalk-cloudfront apply -target="aws_cloudfront_distribution.distribution" --auto-approve')
+                sh ('terraform -chdir=Terraform/modules/aws-elasticbeanstalk-cloudfront apply -target="aws_cloudfront_distribution.distribution" -force --auto-approve')
            }
         }
     }
