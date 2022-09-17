@@ -39,4 +39,12 @@ build/
 # Terraform/.terraform/
 # Terraform/.terraform.lock.hcl
 # Terraform/.terraform/providers/registry.terraform.io/hashicorp/aws/4.18.0/windows_386/terraform-provider-aws_v4.18.0_x5.exe
-**/.terraform/*
+terraform.tfstate.backup
+terraform.tfstate
+.terraform.lock.hcl
+.terraform
+Terraform/terraform.tfstate.backup
+Terraform/terraform.tfstate
+Terraform/.terraform.lock.hcl
+Terraform/.terraform
+

@@ -3,6 +3,7 @@ pipeline {
     environment {
         AWS_ACCESS_KEY_ID = credentials('jenkins-access-key-id')
         AWS_SECRET_ACCESS_KEY = credentials('jenkins-secret-access-key')
+        REGION = "us-east-1"
         AWS_S3_BUCKET = "sudos-duihua-s3bucket"
         ARTIFACT_NAME = "duihua.war"
         AWS_EB_APP_NAME = "sudos-duihua-app"
@@ -58,7 +59,7 @@ pipeline {
         }
         stage('Publish artifacts to S3 Bucket') {
             steps {
-                sh "aws configure set region us-east-1"
+                sh "aws configure set region $REGION"
                 sh "aws s3 cp ./target/*.war s3://$AWS_S3_BUCKET/$ARTIFACT_NAME"
             }
          }
