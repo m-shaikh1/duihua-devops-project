@@ -6,6 +6,10 @@ pipeline {
     }
     
     stages {
+        stage ("terraform init") {
+            steps {
+                sh ('terraform -chdir=Terraform/modules/aws-elasticbeanstalk-cloudfront init') 
+            }
 
         stage ("terraform apply") {
             steps {
