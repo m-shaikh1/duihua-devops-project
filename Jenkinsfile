@@ -8,9 +8,9 @@ pipeline {
         AWS_EB_APP_NAME = "sudos-duihua-app"
         AWS_EB_APP_VERSION = "${BUILD_ID}"
         AWS_EB_ENVIRONMENT = "sudos-duihua-env"
-        SONAR_IP = "3.81.129.130"
+        SONAR_IP = "54.90.231.11"
         SONAR_PROJECT = "duihua-devops-project"
-        SONAR_TOKEN = "4b9eb0d4bc0d621152f6a5ef5916a218a4068371"
+        SONAR_TOKEN = "ef40528131c6157c4de46afda16c3a3f49cb90fb"
     }
     stages {
         stage('Validate') {
