@@ -32,7 +32,7 @@
     sudo apt-get install terraform
 
     # Clone the git hub repository for cloudfront implementation and running playbooks
-    git clone https://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:x-oauth-basic@github.com/m-shaikh1/duihua-devops-project.git 
+    git clone https://github.com/m-shaikh1/duihua-devops-project.git 
     cd duihua-devops-project/Ansible-Playbooks
     ansible-playbook jenkins-mvn-jdk-playbook.yml
     ansible-playbook pip-awscli-playbook.yml
