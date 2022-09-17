@@ -68,11 +68,6 @@ pipeline {
                 sh ('terraform -chdir=Terraform/modules/aws-elasticbeanstalk-cloudfront init') 
             }
         }
-        stage ("terraform destroy") {
-            steps {
-                sh ('terraform -chdir=Terraform/modules/aws-elasticbeanstalk-cloudfront destroy --auto-approve') 
-            }
-        }
         stage ("terraform apply elasticbeanstalk") {
             steps {
                 sh ('terraform -chdir=Terraform/modules/aws-elasticbeanstalk-cloudfront apply -target="aws_elastic_beanstalk_application.sudos-duihua-app" -target="aws_elastic_beanstalk_environment.sudos-duihua-env" --auto-approve')
