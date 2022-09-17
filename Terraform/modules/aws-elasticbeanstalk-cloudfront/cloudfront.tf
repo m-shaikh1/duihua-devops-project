@@ -4,7 +4,7 @@ locals {
 
 resource "aws_cloudfront_distribution" "distribution" {
   origin {
-    domain_name = aws_elastic_beanstalk_environment.sudos-duihua-env.cname
+    domain_name = "$(aws_elastic_beanstalk_environment.sudos-duihua-env.cname)"
     origin_id   = local.origin_id
 
     custom_origin_config {
