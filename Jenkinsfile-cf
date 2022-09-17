@@ -9,7 +9,7 @@ pipeline {
   
         stage ("terraform init") {
             steps {
-                sh ('terraform -chdir=Terraform/modules/aws-elasticbeanstalk-cloudfront init') 
+                sh ('terraform -chdir=Terraform/modules/aws-elasticbeanstalk-cloudfront init --upgrade') 
             }
         }
 
