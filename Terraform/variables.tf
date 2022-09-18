@@ -1,4 +1,3 @@
-# aws-vpc variables
 variable "cidr_block" {
   description = "CIDR block for the VPC"
   type        = string
@@ -23,7 +22,6 @@ variable "REGION" {
 
 }
 
-# aws-ec2 variables
 variable "ami-image" {
   type    = string
   default = "ami-052efd3df9dad4825"
@@ -34,7 +32,6 @@ variable "instance_type" {
   default = "t2.large"
 }
 
-# aws-elasticbeanstalk variables
 variable "eb-app-name" {
   default = "sudos-duihua-app"
 }
