@@ -12,7 +12,7 @@ resource "aws_lb_target_group" "my-target-group" {
   port        = 80
   protocol    = "HTTP"
   target_type = "instance"
-  vpc_id      = "${aws_vpc.sudos-duihua-vpc.id}"
+  vpc_id      = "${aws_vpc.project-vpc.id}"
 }
 
 resource "aws_lb_target_group_attachment" "my-alb-target-group-attachment1" {
@@ -35,8 +35,8 @@ resource "aws_lb" "my-aws-alb" {
   ]
 
   subnets = [
-    "${aws_subnet.sudos-duihua-public_subnet.id}",
-    "${aws_subnet.sudos-duihua-public_subnet2.id}",
+    "${aws_subnet.project-public_subnet.id}",
+    "${aws_subnet.project-public_subnet2.id}",
   ]
 
   tags = {
@@ -60,7 +60,7 @@ resource "aws_lb_listener" "my-test-alb-listner" {
 
 resource "aws_security_group" "my-alb-sg" {
   name   = "my-alb-sg"
-  vpc_id = "${aws_vpc.sudos-duihua-vpc.id}"
+  vpc_id = "${aws_vpc.project-vpc.id}"
 }
 
 resource "aws_security_group_rule" "inbound_ssh" {

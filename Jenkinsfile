@@ -4,14 +4,14 @@ pipeline {
         AWS_ACCESS_KEY_ID = credentials('jenkins-access-key-id')
         AWS_SECRET_ACCESS_KEY = credentials('jenkins-secret-access-key')
         REGION = "us-east-1"
-        AWS_S3_BUCKET = "sudos-duihua-s3bucket"
+        AWS_S3_BUCKET = "project-s3bucket" // Change the name of the S3Bucket here to match the one in the aws-s3bucket Terraform Module
         ARTIFACT_NAME = "duihua.war"
-        AWS_EB_APP_NAME = "sudos-duihua-app"
+        AWS_EB_APP_NAME = "Elasticbeanstalk-app" // This have to match the app name in the aws-elasticbeanstalk-cloudfront Terraform Module 
         AWS_EB_APP_VERSION = "${BUILD_ID}"
-        AWS_EB_ENVIRONMENT = "sudos-duihua-env"
-        SONAR_IP = "54.90.231.11"
-        SONAR_PROJECT = "duihua-devops-project"
-        SONAR_TOKEN = "ef40528131c6157c4de46afda16c3a3f49cb90fb"
+        AWS_EB_ENVIRONMENT = "Elasticbeanstalk-env" // This have to match the env name in the aws-elasticbeanstalk-cloudfront Terraform Module
+        SONAR_IP = "54.90.231.11" // Change this IP to the ec2 IP Address outputted in the beginning (Sonarqube Server)
+        SONAR_PROJECT = "duihua-devops-project" // Change this to your Sonarqube project name 
+        SONAR_TOKEN = "ef40528131c6157c4de46afda16c3a3f49cb90fb" // change this to your Sonarqube Token
     }
     stages {
         stage('Validate') {
