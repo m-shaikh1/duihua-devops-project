@@ -1,8 +1,8 @@
-resource "aws_s3_bucket" "sudos-duihua-s3bucket" {
-  bucket = "sudos-duihua-s3bucket"
+resource "aws_s3_bucket" "project-s3bucket" {
+  bucket = "project-s3bucket" //Change the name of the S3Bucket here to be unique (All small letters)
   force_destroy = true
 
   tags = {
-    Name = "sudos-duihua-s3bucket"
+    Name = "project-s3bucket"
   }
 }

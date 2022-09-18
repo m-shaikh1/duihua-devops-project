@@ -12,12 +12,12 @@ provider "aws" {
   region = "us-east-1"
 
 }
-resource "aws_elastic_beanstalk_application" "sudos-duihua-app" {
+resource "aws_elastic_beanstalk_application" "Elasticbeanstalk-app" {
   name        = var.eb-app-name
 }
-resource "aws_elastic_beanstalk_environment" "sudos-duihua-env" {
+resource "aws_elastic_beanstalk_environment" "Elasticbeanstalk-env" {
   name                = var.eb-env-name
-  application         = aws_elastic_beanstalk_application.sudos-duihua-app.name
+  application         = aws_elastic_beanstalk_application.Elasticbeanstalk-app.name
   solution_stack_name = var.eb-solution-stack-name
   
   setting {
@@ -27,12 +27,12 @@ resource "aws_elastic_beanstalk_environment" "sudos-duihua-env" {
   }
 }
 locals {
-  origin_id = "duihua-devops-project-cf" 
+  origin_id = "Elasticbeanstalk-CloudFront" 
 }
 
 resource "aws_cloudfront_distribution" "distribution" {
   origin {
-    domain_name = aws_elastic_beanstalk_environment.sudos-duihua-env.cname
+    domain_name = aws_elastic_beanstalk_environment.Elasticbeanstalk-env.cname
     origin_id   = local.origin_id
 
     custom_origin_config {
@@ -45,7 +45,7 @@ resource "aws_cloudfront_distribution" "distribution" {
 
   enabled             = true
   is_ipv6_enabled     = true
-  comment             = "This is Duihua Application from ElasticBeanstalk"
+  comment             = "This CloudFront Application is from ElasticBeanstalk"
 
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]

@@ -1,57 +1,56 @@
-
-resource "aws_vpc" "sudos-duihua-vpc" {
+resource "aws_vpc" "project-vpc" {
   cidr_block = var.cidr_block
   tags = {
-    "Name" = "sudos-duihua-vpc"
+    "Name" = "project-vpc"
   }
 }
 
-resource "aws_internet_gateway" "sudos-duihua-gateway" {
-  vpc_id = aws_vpc.sudos-duihua-vpc.id
+resource "aws_internet_gateway" "project-gateway" {
+  vpc_id = aws_vpc.project-vpc.id
   tags = {
-    "Name" = "sudos-duihua-gateway"
+    "Name" = "project-gateway"
   }
 }
 
-resource "aws_route_table" "sudos-duihua-public-rt" {
-  vpc_id = aws_vpc.sudos-duihua-vpc.id
+resource "aws_route_table" "project-public-rt" {
+  vpc_id = aws_vpc.project-vpc.id
   tags = {
-    "Name" = "sudos-duihua-public-rt"
+    "Name" = "project-public-rt"
   }
 }
 
-resource "aws_route" "sudos-duihua-public-route" {
-  route_table_id         = aws_route_table.sudos-duihua-public-rt.id
+resource "aws_route" "project-public-route" {
+  route_table_id         = aws_route_table.project-public-rt.id
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = aws_internet_gateway.sudos-duihua-gateway.id
+  gateway_id             = aws_internet_gateway.project-gateway.id
 }
 
 
-resource "aws_subnet" "sudos-duihua-public_subnet" {
-  vpc_id     = aws_vpc.sudos-duihua-vpc.id
+resource "aws_subnet" "project-public_subnet" {
+  vpc_id     = aws_vpc.project-vpc.id
   cidr_block = var.public_subnet_cidr_blocks
   availability_zone = "us-east-1a"
   tags = {
-    "Name" = "sudos-duihua-public_subnet"
+    "Name" = "project-public_subnet"
   }
 }
-resource "aws_subnet" "sudos-duihua-public_subnet2" {
-  vpc_id     = aws_vpc.sudos-duihua-vpc.id
+resource "aws_subnet" "project-public_subnet2" {
+  vpc_id     = aws_vpc.project-vpc.id
   cidr_block = var.public_subnet2_cidr_blocks
   availability_zone = "us-east-1b"
   tags = {
-    "Name" = "sudos-duihua-public_subnet2"
+    "Name" = "project-public_subnet2"
   }
 }
 
 
 resource "aws_route_table_association" "public" {
-  subnet_id      = aws_subnet.sudos-duihua-public_subnet.id
-  route_table_id = aws_route_table.sudos-duihua-public-rt.id
+  subnet_id      = aws_subnet.project-public_subnet.id
+  route_table_id = aws_route_table.project-public-rt.id
 }
 
-resource "aws_security_group" "sudos-duihua-sg" {
-  vpc_id = aws_vpc.sudos-duihua-vpc.id
+resource "aws_security_group" "project-sg" {
+  vpc_id = aws_vpc.project-vpc.id
   ingress {
     description = "Security Group to Allow SSH and Jenkins Traffic"
     from_port   = 22
@@ -87,6 +86,6 @@ resource "aws_security_group" "sudos-duihua-sg" {
     cidr_blocks      = ["0.0.0.0/0"]
   }
   tags = {
-    "Name" = "sudos-duihua-sg"
+    "Name" = "project-sg"
   }
 }
