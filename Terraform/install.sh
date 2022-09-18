@@ -15,7 +15,7 @@
     docker container run -d -p 9000:9000 --name sonarserver sonarqube:8.2-community
 
     # MySql Database
-    docker run  --name mysql -e MYSQL_ROOT_PASSWORD=mysql -e MYSQL_USER=mysql -e MYSQL_DATABASE=mysql -e MYSQL_PASSWORD=mysql -d -p 3306:3306 mysql
+    docker run  --name mysql -e MYSQL_ROOT_PASSWORD=mysql -e MYSQL_USER=mysql -e MYSQL_DATABASE=mysql -e MYSQL_PASSWORD=mysql -d -p 3306:3306 mysql # /// Change this to match your application's MySql Database Credentials
     
     # install Terraform
     sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
