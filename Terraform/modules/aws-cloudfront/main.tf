@@ -62,5 +62,4 @@ resource "aws_cloudfront_distribution" "distribution" {
   viewer_certificate {
     cloudfront_default_certificate = true
   }
-  create_duration = "15m"
 }
