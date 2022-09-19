@@ -8,7 +8,7 @@
 
     # install Docker:
     sudo apt install docker docker.io -y 
-    sudo usermod -aG docker ${USER}
+    sudo usermod -aG docker $${USER}
     newgrp docker
    
     # sonarqube
@@ -36,3 +36,8 @@
     cd duihua-devops-project/Ansible-Playbooks
     ansible-playbook jenkins-mvn-jdk-playbook.yml
     ansible-playbook pip-awscli-playbook.yml
+
+    # Set AWS Access Key and AWS Secret Access Key and Region Credentials 
+    aws configure set aws_access_key_id "${AWS_ACCESS_KEY_ID}"
+    aws configure set aws_secret_access_key "${AWS_SECRET_ACCESS_KEY}"
+    aws configure set region "${AWS_REGION}"

@@ -32,6 +32,9 @@ module "ec2" {
   subnet_id = module.vpc.aws_subnet
   vpc_security_group_ids = module.vpc.aws_security_group
   key_name = module.key.aws_key_pair
+  AWS_ACCESS_KEY_ID = var.AWS_ACCESS_KEY_ID
+  AWS_SECRET_ACCESS_KEY = var.AWS_SECRET_ACCESS_KEY
+  AWS_REGION = var.AWS_REGION
 }
 
 module "s3bucket" {
