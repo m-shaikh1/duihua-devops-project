@@ -65,7 +65,7 @@ pipeline {
         }
         stage ("terraform apply elasticbeanstalk") {
             steps {
-                sh ('terraform -chdir=Terraform/modules/aws-elasticbeanstalk-cloudfront apply -target="aws_elastic_beanstalk_application.$Elasticbeanstalk-app" -target="aws_elastic_beanstalk_environment.$AWS_EB_ENVIRONMENT" --auto-approve')
+                sh ('terraform -chdir=Terraform/modules/aws-elasticbeanstalk-cloudfront apply -target="aws_elastic_beanstalk_application.$AWS_EB_APP_NAME" -target="aws_elastic_beanstalk_environment.$AWS_EB_ENVIRONMENT" --auto-approve')
            }
         }
         stage('Deploy') {
