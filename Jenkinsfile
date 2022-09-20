@@ -1,9 +1,6 @@
 pipeline {
     agent any
     environment {
-        // AWS_ACCESS_KEY_ID = credentials('jenkins-access-key-id')
-        // AWS_SECRET_ACCESS_KEY = credentials('jenkins-secret-access-key')
-        // REGION = "us-east-1"
         AWS_S3_BUCKET = "mshaikh-project-s3bucket" // Change the name of the S3Bucket here to match the one in the aws-s3bucket Terraform Module ///
         ARTIFACT_NAME = "duihua.war"
         AWS_EB_APP_NAME = "Elasticbeanstalk-app" // This have to match the app name in the aws-elasticbeanstalk-cloudfront Terraform Module 
@@ -54,7 +51,6 @@ pipeline {
         }
         stage('Publish artifacts to S3 Bucket') {
             steps {
-                //sh "aws configure set region $REGION"
                 sh "aws s3 cp ./target/*.war s3://$AWS_S3_BUCKET/$ARTIFACT_NAME"
             }
          }
@@ -76,6 +72,7 @@ pipeline {
          }
         stage ("terraform apply cloudfront") {
             steps {
+                sh ('terraform -chdir=Terraform/modules/aws-elasticbeanstalk-cloudfront destroy -target="aws_cloudfront_distribution.distribution" --auto-approve')
                 sh ('terraform -chdir=Terraform/modules/aws-elasticbeanstalk-cloudfront apply -target="aws_cloudfront_distribution.distribution" --auto-approve')
            }
         }
