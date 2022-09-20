@@ -41,3 +41,12 @@ variable "eb-env-name" {
 variable "eb-solution-stack-name" {
   default = "64bit Amazon Linux 2 v4.2.18 running Tomcat 8.5 Corretto 11"
 }
+variable "AWS_ACCESS_KEY_ID" {
+    description = "Plaese Enter AWS Access Key ID that will be used for Jenkins"
+}
+variable "AWS_SECRET_ACCESS_KEY" {
+  description = "Plaese Enter AWS Secret Access Key that will be used for Jenkins"
+}
+variable "AWS_REGION" {
+  description = "Plaese Enter Default AWS Region that will be used for Jenkins"
+}

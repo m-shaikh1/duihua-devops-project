@@ -18,3 +18,12 @@ variable "vpc_security_group_ids" {
 variable "key_name" {
   
 }
+variable "AWS_ACCESS_KEY_ID" {
+    description = "Plaese Enter AWS Access Key ID that will be used for Jenkins"
+}
+variable "AWS_SECRET_ACCESS_KEY" {
+  description = "Plaese Enter AWS Secret Access Key that will be used for Jenkins"
+}
+variable "AWS_REGION" {
+  description = "Plaese Enter Default AWS Region that will be used for Jenkins"
+}
