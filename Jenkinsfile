@@ -1,17 +1,15 @@
 pipeline {
     agent any
     environment {
-        AWS_ACCESS_KEY_ID = credentials('jenkins-access-key-id')
-        AWS_SECRET_ACCESS_KEY = credentials('jenkins-secret-access-key')
-        REGION = "us-east-1"
-        AWS_S3_BUCKET = "project-s3bucket" // Change the name of the S3Bucket here to match the one in the aws-s3bucket Terraform Module ///
+        AWS_S3_BUCKET = "mshaikh-project-s3bucket" // Change the name of the S3Bucket here to match the one in the aws-s3bucket Terraform Module ///
         ARTIFACT_NAME = "duihua.war"
         AWS_EB_APP_NAME = "Elasticbeanstalk-app" // This have to match the app name in the aws-elasticbeanstalk-cloudfront Terraform Module 
         AWS_EB_APP_VERSION = "${BUILD_ID}"
         AWS_EB_ENVIRONMENT = "Elasticbeanstalk-env" // This have to match the env name in the aws-elasticbeanstalk-cloudfront Terraform Module
-        SONAR_IP = "54.90.231.11" // Change this IP to the ec2 IP Address outputted in the beginning (Sonarqube Server) ///
-        SONAR_PROJECT = "duihua-devops-project" // Set your Sonarqube project name ///
-        SONAR_TOKEN = "ef40528131c6157c4de46afda16c3a3f49cb90fb" // Set your Sonarqube Token ///
+        SONAR_IP = "54.166.182.69" // Change this IP to the ec2 IP Address outputted in the beginning (Sonarqube Server) ///
+        SONAR_PROJECT = "new-duihua-project" // Set your Sonarqube project name ///
+        SONAR_TOKEN = "3f9b87a579e83d6925eccd6cc62f6151acfa9fc8" // Set your Sonarqube Token ///
+    }
     stages {
         stage('Validate') {
             steps {
@@ -53,7 +51,6 @@ pipeline {
         }
         stage('Publish artifacts to S3 Bucket') {
             steps {
-                sh "aws configure set region $REGION"
                 sh "aws s3 cp ./target/*.war s3://$AWS_S3_BUCKET/$ARTIFACT_NAME"
             }
          }
@@ -64,7 +61,7 @@ pipeline {
         }
         stage ("terraform apply elasticbeanstalk") {
             steps {
-                sh ('terraform -chdir=Terraform/modules/aws-elasticbeanstalk-cloudfront apply -target="aws_elastic_beanstalk_application.sudos-duihua-app" -target="aws_elastic_beanstalk_environment.sudos-duihua-env" --auto-approve')
+                sh ('terraform -chdir=Terraform/modules/aws-elasticbeanstalk-cloudfront apply -target="aws_elastic_beanstalk_application.$AWS_EB_APP_NAME" -target="aws_elastic_beanstalk_environment.$AWS_EB_ENVIRONMENT" --auto-approve')
            }
         }
         stage('Deploy') {
@@ -75,6 +72,7 @@ pipeline {
          }
         stage ("terraform apply cloudfront") {
             steps {
+                sh ('terraform -chdir=Terraform/modules/aws-elasticbeanstalk-cloudfront destroy -target="aws_cloudfront_distribution.distribution" --auto-approve')
                 sh ('terraform -chdir=Terraform/modules/aws-elasticbeanstalk-cloudfront apply -target="aws_cloudfront_distribution.distribution" --auto-approve')
            }
         }
