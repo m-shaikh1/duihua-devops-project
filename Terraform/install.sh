@@ -38,7 +38,6 @@
     ansible-playbook pip-awscli-playbook.yml
 
     # Set AWS Access Key and AWS Secret Access Key and Region Credentials 
-    sudo su jenkins
-    aws configure set aws_access_key_id "${AWS_ACCESS_KEY_ID}"
-    aws configure set aws_secret_access_key "${AWS_SECRET_ACCESS_KEY}"
-    aws configure set region "${AWS_REGION}"
+    runuser -l  jenkins -c 'aws configure set aws_access_key_id "${AWS_ACCESS_KEY_ID}"'
+    runuser -l  jenkins -c 'aws configure set aws_secret_access_key "${AWS_SECRET_ACCESS_KEY}"'
+    runuser -l  jenkins -c 'aws configure set region "${AWS_REGION}"'
