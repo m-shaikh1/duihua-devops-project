@@ -65,7 +65,7 @@ pipeline {
         }
         stage ("terraform apply elasticbeanstalk") {
             steps {
-                sh ('terraform -chdir=Terraform/modules/aws-elasticbeanstalk-cloudfront apply -target="aws_elastic_beanstalk_application.sudos-duihua-app" -target="aws_elastic_beanstalk_environment.sudos-duihua-env" --auto-approve')
+                sh ('terraform -chdir=Terraform/modules/aws-elasticbeanstalk-cloudfront apply -target="aws_elastic_beanstalk_application.$Elasticbeanstalk-app" -target="aws_elastic_beanstalk_environment.$AWS_EB_ENVIRONMENT" --auto-approve')
            }
         }
         stage('Deploy') {
